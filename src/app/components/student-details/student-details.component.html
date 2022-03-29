@@ -1,0 +1,81 @@
+<div style="width: 500px; margin: auto;">
+    <div *ngIf="currentStudent" class="edit-form">
+      <h4>Student</h4>
+      <form>
+        <div class="form-group">
+          <label for="title">First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="firstName"
+            [(ngModel)]="currentStudent.firstName"
+            name="firstName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="title">Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="lastName"
+            [(ngModel)]="currentStudent.lastName"
+            name="lastName"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            id="description"
+            [(ngModel)]="currentStudent.description"
+            name="description"
+          />
+        </div>
+  
+        <div class="form-group">
+          <label><strong>Status:</strong></label>
+          <input
+            type="checkbox"
+            class="form-control"
+            id="isActive"
+            [(ngModel)]="currentStudent.isActive"
+            name="isActive"
+          />
+        </div>
+      </form>
+  
+      <button
+        class="badge badge-primary mr-2"
+        *ngIf="currentStudent.isActive"
+        (click)="setAvailableStatus(false)"
+      >
+        Set Inactive
+      </button>
+      <button
+        *ngIf="!currentStudent.isActive"
+        class="badge badge-primary mr-2"
+        (click)="setAvailableStatus(true)"
+      >
+        Set Active
+      </button>
+  
+      <button class="badge badge-danger mr-2" (click)="deleteStudent()">
+        Delete
+      </button>
+  
+      <button
+        type="submit"
+        class="badge badge-success"
+        (click)="updateStudent()"
+      >
+        Update
+      </button>
+      <p></p>
+    </div>
+  
+    <div *ngIf="!currentStudent">
+      <br />
+      <p>This student is not accessible</p>
+    </div>
+  </div>
