@@ -9,9 +9,18 @@ import { StudentService } from 'src/app/services/student.service';
 export class StudentCreateComponent implements OnInit {
 
   student = {
-    name: '',
-    description: '',
-    available: false
+    studentId: 0,
+    firstName: '',
+    lastName: '',
+    gender: null,
+    dateOfBirth: null,
+    address: '',
+    comments: null,
+    fatherEmailID: null,
+    fatherMobile: null,
+    isActive: true,
+    motherEmailID: null,
+    motherMobile: null
   };
   submitted = false;
 
@@ -21,12 +30,8 @@ export class StudentCreateComponent implements OnInit {
   }
 
   createStudent(): void {
-    const data = {
-      name: this.student.name,
-      description: this.student.description
-    };
 
-    this.studentService.create(data)
+    this.studentService.create(this.student)
       .subscribe(
         response => {
           console.log(response);
@@ -40,9 +45,18 @@ export class StudentCreateComponent implements OnInit {
   newStudent(): void {
     this.submitted = false;
     this.student = {
-      name: '',
-      description: '',
-      available: false
+      studentId: 0,
+      firstName: '',
+      lastName: '',
+      gender: null,
+      dateOfBirth: null,
+      address: '',
+      comments: null,
+      fatherEmailID: null,
+      fatherMobile: null,
+      isActive: true,
+      motherEmailID: null,
+      motherMobile: null
     };
   }
 

@@ -30,10 +30,6 @@
         {{student.studentId}}: {{student.firstName}} {{student.lastName}}
         </li>
       </ul>
-  
-      <button class="m-4 btn btn-sm btn-danger" (click)="deleteAllStudents()">
-        Delete All
-      </button>
     </div>
     <div class="col-md-6">
       <div *ngIf="currentStudent">
@@ -48,7 +44,7 @@
           <label><strong>Gender:</strong> {{currentStudent.gender}}</label>
         </div>
         <div>
-          <label><strong>Date Of Birth:</strong> {{currentStudent.dateOfBirth}}</label>
+          <label><strong>Date Of Birth:</strong> {{currentStudent.dateOfBirth | date:'dd-MM-yyyy'}}</label>
         </div>
         <div>
           <label><strong>Address:</strong> {{currentStudent.address}}</label>

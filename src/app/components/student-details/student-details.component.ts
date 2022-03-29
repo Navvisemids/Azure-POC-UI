@@ -39,7 +39,7 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   updateStudent(): void {
-    this.studentService.update(this.currentStudent.id, this.currentStudent)
+    this.studentService.update(this.currentStudent.studentId, this.currentStudent)
       .subscribe(
         response => {
           console.log(response);
@@ -51,7 +51,7 @@ export class StudentDetailsComponent implements OnInit {
   }
 
   deleteStudent(): void {
-    this.studentService.delete(this.currentStudent.id)
+    this.studentService.delete(this.currentStudent.studentId)
       .subscribe(
         response => {
           console.log(response);

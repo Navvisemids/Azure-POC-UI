@@ -23,55 +23,72 @@
           />
         </div>
         <div class="form-group">
-          <label for="description">Description</label>
-          <input
-            type="text"
-            class="form-control"
-            id="description"
-            [(ngModel)]="currentStudent.description"
-            name="description"
-          />
+          <label for="description">Gender</label>
+          <select class="form-control" name="gender" id="gender" [(ngModel)]="currentStudent.gender">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="description">DOB</label>
+          <input type="date" class="form-control" id="dob" name="dob" [ngModel]="currentStudent.dateOfBirth | date:'yyyy-MM-dd'"
+          (ngModelChange)="currentStudent.dateOfBirth = $event">
+        </div>
+
+        <div class="form-group">
+          <label for="description">Address</label>
+          <textarea class="form-control" name="address" id="address" [(ngModel)]="currentStudent.address"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Father's Email ID</label>
+          <input class="form-control" type="email" id="fatherEmail" name="fatherEmail" [(ngModel)]="currentStudent.fatherEmailID"/>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Father's Mobile Number</label>
+          <input type="tel" class="form-control" id="fatherMobile" name="fatherMobile" [(ngModel)]="currentStudent.fatherMobile" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"/>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Mother's Email ID</label>
+          <input class="form-control" type="email" id="motherEmail" name="motherEmail" [(ngModel)]="currentStudent.motherEmailID"/>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Mother's Mobile Number</label>
+          <input type="tel" class="form-control" id="motherMobile" name="motherMobile" [(ngModel)]="currentStudent.motherMobile" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"/>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Comments</label>
+          <textarea class="form-control" name="comment" id="comment" [(ngModel)]="currentStudent.comments"></textarea>
         </div>
   
         <div class="form-group">
-          <label><strong>Status:</strong></label>
+          <label>Status:</label>
           <input
             type="checkbox"
-            class="form-control"
             id="isActive"
             [(ngModel)]="currentStudent.isActive"
+            [ngModelOptions]="{standalone: true}"
             name="isActive"
           />
         </div>
       </form>
   
-      <button
-        class="badge badge-primary mr-2"
-        *ngIf="currentStudent.isActive"
-        (click)="setAvailableStatus(false)"
-      >
-        Set Inactive
-      </button>
-      <button
-        *ngIf="!currentStudent.isActive"
-        class="badge badge-primary mr-2"
-        (click)="setAvailableStatus(true)"
-      >
-        Set Active
-      </button>
   
-      <button class="badge badge-danger mr-2" (click)="deleteStudent()">
+      <button type="button" class="btn btn-danger" (click)="deleteStudent()">
         Delete
       </button>
-  
-      <button
-        type="submit"
-        class="badge badge-success"
+
+      <button type="button" class="btn btn-secondary"
         (click)="updateStudent()"
       >
         Update
       </button>
-      <p></p>
+      <p>{{message}}</p>
     </div>
   
     <div *ngIf="!currentStudent">
