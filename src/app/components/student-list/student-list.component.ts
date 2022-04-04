@@ -12,11 +12,13 @@ export class StudentListComponent implements OnInit {
   currentStudent = null;
   currentIndex = -1;
   name = '';
+  courses: any[];
 
   constructor(private studentService: StudentService) { }
 
   ngOnInit(): void {
     this.readStudents();
+    this.readAllCourses();
   }
 
   readStudents(): void {
@@ -25,6 +27,18 @@ export class StudentListComponent implements OnInit {
         students => {
           this.students = students;
           console.log(students);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  readAllCourses(): void {
+    this.studentService.readAllCourses()
+      .subscribe(
+        courses => {
+          this.courses = courses;
+          console.log(courses);
         },
         error => {
           console.log(error);
@@ -40,6 +54,23 @@ export class StudentListComponent implements OnInit {
   setCurrentStudent(student, index): void {
     this.currentStudent = student;
     this.currentIndex = index;
+    this.getStudentCourse(this.currentStudent.studentId);
+  }
+
+  getStudentCourse(id): void {
+    this.studentService.getStudentCourse(id)
+      .subscribe(
+        course => {
+          if (course) {
+            const courseDetails = this.courses.find((c) => { return c.courseID === course.courseId });
+            this.currentStudent.course = course;
+            this.currentStudent.courseDeatils = courseDetails;
+          }
+          console.log(this.currentStudent);
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   deleteAllStudents(): void {

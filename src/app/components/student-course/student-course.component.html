@@ -1,0 +1,56 @@
+<div style="width: 500px; margin: auto;">
+    <div *ngIf="currentStudent" class="edit-form">
+      <h4>Student Course</h4>
+      <form>
+        <div>
+          <label><strong>Student ID:</strong> {{currentStudent.studentId}}</label> 
+        </div>
+        <div>
+          <label><strong>Name:</strong> {{currentStudent.firstName}} {{currentStudent.lastName}}</label> 
+        </div>
+        <div class="form-group">
+          <label for="description"><strong>Course: </strong></label> 
+          <select class="form-control" name="course" id="course" [(ngModel)]="currentStudent.course && currentStudent.course.courseId" (ngModelChange)="onCourseChange($event)">
+            <option *ngFor="let c of courses" [ngValue]="c.courseID">{{c.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="description">Course Fee: </label>
+          <input type="number" class="form-control" id="courseFee" name="courseFee" [(ngModel)]="currentStudent.course && currentStudent.course.courseFee"/>
+        </div>
+        <div class="form-group">
+          <label for="description">Start Date: </label>
+          <input type="date" class="form-control" id="startDate" name="startDate" [ngModel]="currentStudent.course && currentStudent.course.fromDate | date:'yyyy-MM-dd'"
+          (ngModelChange)="currentStudent.course.fromDate = $event">
+        </div>
+        <div class="form-group">
+          <label for="description">End Date: </label>
+          <input type="date" class="form-control" id="endDate" name="endDate" [ngModel]="currentStudent.course && currentStudent.course.toDate | date:'yyyy-MM-dd'"
+          (ngModelChange)="currentStudent.course.toDate = $event">
+        </div>
+        <div class="form-group">
+          <label>Status:</label>
+          <input
+            type="checkbox"
+            id="isActive"
+            [(ngModel)]="currentStudent.course && currentStudent.course.isActive"
+            [ngModelOptions]="{standalone: true}"
+            name="isActive"
+          />
+        </div>
+      </form>
+  
+
+      <button type="button" class="btn btn-primary"
+        (click)="updateStudentCourse()"
+      >
+        Update
+      </button>
+      <button type="button" class="btn btn-secondary"
+        (click)="goBack()"
+      >
+        Cancel
+      </button>
+      <p>{{message}}</p>
+    </div>
+  </div>

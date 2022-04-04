@@ -34,6 +34,9 @@
     <div class="col-md-6">
       <div *ngIf="currentStudent">
         <h4>Student</h4>
+        <a class="badge badge-warning" routerLink="/students/{{currentStudent.studentId}}">
+          Edit
+        </a>
         <div>
           <label><strong>Student ID:</strong> {{currentStudent.studentId}}</label> 
         </div>
@@ -61,13 +64,21 @@
             {{currentStudent.motherMobile}}
           </label>
         </div>
+        <div *ngIf="currentStudent.course">
+          <label><strong>Course Details:</strong> <br/> 
+            Course Name: {{currentStudent.courseDeatils.name}} <br/> 
+            Course Description: {{currentStudent.courseDeatils.description}} <br/> 
+            Course Fee: {{currentStudent.course.courseFee}} <br/> 
+            Course Start Date: {{currentStudent.course.fromDate | date:'dd-MM-yyyy'}} <br/> 
+            Course End Date: {{currentStudent.course.toDate | date:'dd-MM-yyyy'}} <br/>
+          </label>
+        </div>
+        <a routerLink="/student-course/{{currentStudent.studentId}}">
+          Update Course
+        </a>
         <div>
           <label><strong>Comments:</strong> {{currentStudent.comments}}</label>
         </div>
-  
-        <a class="badge badge-warning" routerLink="/students/{{currentStudent.studentId}}">
-          Edit
-        </a>
       </div>
   
       <div *ngIf="!currentStudent">

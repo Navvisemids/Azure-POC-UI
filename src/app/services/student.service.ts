@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const baseURL = 'https://localhost:44319/api/Student';
+const baseURL = 'https://localhost:44319/';
 
 @Injectable({
   providedIn: 'root'
@@ -12,30 +12,42 @@ export class StudentService {
   constructor(private httpClient: HttpClient) { }
 
   readAll(): Observable<any> {
-    return this.httpClient.get(baseURL);
+    return this.httpClient.get(baseURL + 'api/Student');
   }
 
   read(id): Observable<any> {
-    return this.httpClient.get(`${baseURL}/${id}`);
+    return this.httpClient.get(`${baseURL}api/Student/${id}`);
   }
 
   create(data): Observable<any> {
-    return this.httpClient.post(baseURL, data);
+    return this.httpClient.post(baseURL + 'api/Student', data);
   }
 
   update(id, data): Observable<any> {
-    return this.httpClient.put(baseURL, data);
+    return this.httpClient.put(baseURL + 'api/Student', data);
   }
 
   delete(id): Observable<any> {
-    return this.httpClient.delete(`${baseURL}/${id}`);
+    return this.httpClient.delete(`${baseURL}api/Student/${id}`);
   }
 
   deleteAll(): Observable<any> {
-    return this.httpClient.delete(baseURL);
+    return this.httpClient.delete(baseURL + 'api/Student');
   }
 
   searchByName(name): Observable<any> {
-    return this.httpClient.get(`${baseURL}?name=${name}`);
+    return this.httpClient.get(`${baseURL}api/Student?name=${name}`);
+  }
+
+  getStudentCourse(id): Observable<any> {
+    return this.httpClient.get(`${baseURL}api/StudentCourse?_studentId=${id}`);
+  }
+
+  readAllCourses(): Observable<any> {
+    return this.httpClient.get(baseURL + 'api/Course');
+  }
+
+  updateStudentCourse(id, data): Observable<any> {
+    return this.httpClient.post(baseURL + 'api/StudentCourse', data);
   }
 }
