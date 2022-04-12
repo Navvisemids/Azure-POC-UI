@@ -110,7 +110,7 @@ export class StudentCourseComponent implements OnInit {
   }
 
   goBack() {
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/students');
   }
 
 }

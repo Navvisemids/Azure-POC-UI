@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StudentService } from 'src/app/services/student.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-list',
@@ -14,7 +15,7 @@ export class StudentListComponent implements OnInit {
   name = '';
   courses: any[];
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, private router: Router) { }
 
   ngOnInit(): void {
     this.readStudents();
@@ -71,6 +72,10 @@ export class StudentListComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+
+  addStudent() {
+    this.router.navigateByUrl('/student-create');
   }
 
   deleteAllStudents(): void {
