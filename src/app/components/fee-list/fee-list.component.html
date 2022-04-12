@@ -1,0 +1,37 @@
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-4">
+        <div class="input-group-append">
+          <button
+            *ngIf="!isGenerate"
+            class="btn btn-secondary"
+            type="button"
+            (click)="isGenerate = true;"
+          >
+            Generate Fees
+          </button>
+          <div *ngIf="isGenerate" class="form-group">
+              <label for="description">Fees Date</label>
+              <input type="date" class="form-control" id="feedate" name="feedate" [ngModel]="feeDate | date:'yyyy-MM-dd'"
+              (ngModelChange)="onFeeDateChange($event)">
+          </div>
+          <button
+            *ngIf="isGenerate"
+            class="btn btn-secondary"
+            type="button"
+            (click)="generateFees()"
+          >
+            Generate
+          </button>
+          {{message}}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Fee List</h4>
+    </div>
+    <div class="col-md-6">
+      
+    </div>
+  </div>
+  

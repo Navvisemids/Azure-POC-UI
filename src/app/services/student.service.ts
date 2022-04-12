@@ -50,4 +50,8 @@ export class StudentService {
   updateStudentCourse(id, data): Observable<any> {
     return this.httpClient.post(baseURL + 'api/StudentCourse', data);
   }
+
+  generateFees(date): Observable<any> {
+    return this.httpClient.get(`${baseURL}api/FeesReceipts?feesDate=${date}`);
+  }
 }

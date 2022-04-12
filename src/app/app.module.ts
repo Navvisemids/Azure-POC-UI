@@ -9,6 +9,8 @@ import { StudentCreateComponent } from './components/student-create/student-crea
 import { StudentDetailsComponent } from './components/student-details/student-details.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { StudentCourseComponent } from './components/student-course/student-course.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FeeListComponent } from './components/fee-list/fee-list.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { StudentCourseComponent } from './components/student-course/student-cour
     StudentCreateComponent,
     StudentDetailsComponent,
     StudentListComponent,
-    StudentCourseComponent
+    StudentCourseComponent,
+    DashboardComponent,
+    FeeListComponent
   ],
   imports: [
     BrowserModule,
