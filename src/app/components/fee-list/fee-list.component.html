@@ -70,7 +70,9 @@
           <td>{{fee.feesDate | date:'dd-MM-yyyy'}}</td>
           <td>{{fee.feeAmount}}</td>
           <td>{{fee.pendingAmount}}</td>
-          <td><button>Edit</button></td>
+          <td><a routerLink="/fee/{{fee.feesId}}">
+            Edit
+          </a></td>
           <td><button (click)="deleteFee(fee)">Delete</button></td>
         </tr>
       </table>

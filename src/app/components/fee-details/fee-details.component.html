@@ -1,0 +1,55 @@
+<div style="width: 500px; margin: auto;">
+    <div *ngIf="feeDetail" class="edit-form">
+      <h4>Fee</h4>
+      <form>
+        <div class="form-group">
+          <label for="title">Student Name</label>
+          {{feeDetail.studentName}}
+        </div>
+        <div class="form-group">
+            <label for="description"><strong>Course: </strong></label> 
+            <select disabled class="form-control" name="course" id="course" [ngModel]="feeDetail.studentCourseID">
+              <option *ngFor="let c of courses" [ngValue]="c.courseID">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Fee Date</label>
+            <input type="date" class="form-control" id="feesDate" name="feesDate" [ngModel]="feeDetail.feesDate | date:'yyyy-MM-dd'"
+            (ngModelChange)="feeDetail.feesDate = $event">
+          </div>
+        <div class="form-group">
+          <label for="title">Fee Amount</label>
+          <input
+            type="text"
+            class="form-control"
+            id="feeAmount"
+            [(ngModel)]="feeDetail.feeAmount"
+            name="feeAmount"
+          />
+        </div>
+        <div class="form-group">
+            <label for="title">Pending Amount</label>
+            <input
+              type="text"
+              class="form-control"
+              id="pendingAmount"
+              [(ngModel)]="feeDetail.pendingAmount"
+              name="pendingAmount"
+            />
+          </div>
+      </form>
+  
+  
+      <!-- <button type="button" class="btn btn-danger" (click)="deleteStudent()">
+        Delete
+      </button> -->
+
+      <button type="button" class="btn btn-secondary"
+        (click)="updateFee()"
+      >
+        Update
+      </button>
+      <p>{{message}}</p>
+    </div>
+
+  </div>

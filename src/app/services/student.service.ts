@@ -62,5 +62,13 @@ export class StudentService {
   deleteFee(data): Observable<any> {
     return this.httpClient.delete(`${baseURL}api/Fees`, data);
   }
+
+  readFee(id): Observable<any> {
+    return this.httpClient.get(`${baseURL}api/Fees?feesID=${id}`);
+  }
+
+  updateFee(data): Observable<any> {
+    return this.httpClient.put(baseURL + 'api/Fees', data);
+  }
   
 }

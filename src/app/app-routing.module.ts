@@ -7,6 +7,7 @@ import { StudentListComponent } from './components/student-list/student-list.com
 import { StudentCourseComponent } from './components/student-course/student-course.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FeeListComponent } from './components/fee-list/fee-list.component';
+import { FeeDetailsComponent } from './components/fee-details/fee-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'students/:id', component: StudentDetailsComponent },
   { path: 'student-course/:id', component: StudentCourseComponent },
   { path: 'student-create', component: StudentCreateComponent },
-  { path: 'fee-list', component: FeeListComponent }
+  { path: 'fee-list', component: FeeListComponent },
+  { path: 'fee/:id', component: FeeDetailsComponent }
 ];
 
 @NgModule({
