@@ -12,19 +12,39 @@ export class FeeListComponent implements OnInit {
   feeDate: any;
   isGenerate: boolean;
   message: any;
-  feeDateUpdate: any;
+  feeList: any;
+  feeFilter: any;
 
   constructor(private studentService: StudentService, private router: Router) { }
 
   ngOnInit(): void {
     this.feeDate = new Date();
-    this.onFeeDateChange(this.feeDate);
     this.isGenerate = false;
     this.message = '';
+    this.feeList = [];
+    this.feeFilter = {
+      fromDate: '2022-01-01',
+      toDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-01',
+      onlyPending: false
+    };
+    this.readAllFeeList();
+  }
+
+  readAllFeeList(): void {
+    this.studentService.readAllFeeList(this.getDateFormat(this.feeFilter.fromDate), 
+    this.getDateFormat(this.feeFilter.toDate), this.feeFilter.onlyPending)
+      .subscribe(
+        feeList => {
+          this.feeList = feeList;
+          console.log(feeList);
+        },
+        error => {
+          console.log(error);
+        });
   }
 
   generateFees() {
-    this.studentService.generateFees(this.feeDateUpdate)
+    this.studentService.generateFees(this.getDateFormat(this.feeDate))
       .subscribe(
         student => {
           this.isGenerate = false;
@@ -36,8 +56,22 @@ export class FeeListComponent implements OnInit {
         });
   }
 
-  onFeeDateChange(date) {
-    this.feeDateUpdate = new Date(date).getDate() + '-' + (new Date(date).getMonth() + 1) + '-' + new Date(date).getFullYear();
+  getDateFormat(date) {
+    return new Date(date).getDate() + '-' + (new Date(date).getMonth() + 1) + '-' + new Date(date).getFullYear();
+  }
+
+  deleteFee(feeData): void {
+    if(confirm("Are you sure to delete?")) {
+      this.studentService.deleteFee(feeData)
+        .subscribe(
+          response => {
+            console.log(response);
+            this.readAllFeeList();
+          },
+          error => {
+            console.log(error);
+          });
+      }
   }
 
 }

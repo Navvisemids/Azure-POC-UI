@@ -13,7 +13,7 @@
           <div *ngIf="isGenerate" class="form-group">
               <label for="description">Fees Date</label>
               <input type="date" class="form-control" id="feedate" name="feedate" [ngModel]="feeDate | date:'yyyy-MM-dd'"
-              (ngModelChange)="onFeeDateChange($event)">
+              (ngModelChange)="feeDate = $event">
           </div>
           <button
             *ngIf="isGenerate"
@@ -27,8 +27,53 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
-      <h4>Fee List</h4>
+    <div class="col-md-12">
+      <div>
+        <h4>Fee List</h4>
+        <div class="form-group">
+            <label for="description">From Date</label>
+            <input type="date" class="form-control" id="fromDate" name="fromDate" [ngModel]="feeFilter.fromDate | date:'yyyy-MM-dd'"
+            (ngModelChange)="feeFilter.fromDate = $event">
+        </div>
+        <div class="form-group">
+            <label for="description">To Date</label>
+            <input type="date" class="form-control" id="toDate" name="toDate" [ngModel]="feeFilter.toDate | date:'yyyy-MM-dd'"
+            (ngModelChange)="feeFilter.toDate = $event">
+        </div>
+        <div class="form-group">
+            <label>Only Pending:</label>
+            <input
+              type="checkbox"
+              id="onlyPending"
+              [(ngModel)]="feeFilter.onlyPending"
+              [ngModelOptions]="{standalone: true}"
+              name="onlyPending"
+            />
+          </div>
+        <button type="button" class="btn btn-secondary"
+          (click)="readAllFeeList()"
+        >
+          Apply
+        </button>
+      </div>
+      <table>
+        <tr>
+          <th>Student Name</th>
+          <th>Fee Date</th>
+          <th>Fee Amount</th>
+          <th>Pending Amount</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr *ngFor="let fee of feeList; let i = index">
+          <td>{{fee.studentName}}</td>
+          <td>{{fee.feesDate | date:'dd-MM-yyyy'}}</td>
+          <td>{{fee.feeAmount}}</td>
+          <td>{{fee.pendingAmount}}</td>
+          <td><button>Edit</button></td>
+          <td><button (click)="deleteFee(fee)">Delete</button></td>
+        </tr>
+      </table>
     </div>
     <div class="col-md-6">
       

@@ -34,6 +34,20 @@ export class StudentListComponent implements OnInit {
         });
   }
 
+  deleteStudent(student): void {
+    if(confirm("Are you sure to delete " + student.firstName + ' ' + student.lastName + '?')) {
+      this.studentService.delete(student.studentId)
+        .subscribe(
+          response => {
+            console.log(response);
+            this.readStudents();
+          },
+          error => {
+            console.log(error);
+          });
+      }
+  }
+
   readAllCourses(): void {
     this.studentService.readAllCourses()
       .subscribe(

@@ -52,6 +52,15 @@ export class StudentService {
   }
 
   generateFees(date): Observable<any> {
-    return this.httpClient.get(`${baseURL}api/FeesReceipts?feesDate=${date}`);
+    return this.httpClient.get(`${baseURL}api/FeesReceipts/GenerateFees?feesDate=${date}`);
   }
+
+  readAllFeeList(fromDate, toDate, onlyPending): Observable<any> {
+    return this.httpClient.get(`${baseURL}api/Fees/GetFeesList?fromDate=${fromDate}&toDate=${toDate}&onlyPending=${onlyPending}`);
+  }
+
+  deleteFee(data): Observable<any> {
+    return this.httpClient.delete(`${baseURL}api/Fees`, data);
+  }
+  
 }
