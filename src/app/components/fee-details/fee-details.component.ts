@@ -69,9 +69,37 @@ export class FeeDetailsComponent implements OnInit {
     this.studentService.getStudentCourse(studentId)
       .subscribe(
         studentCourse => {
-          this.feeDetail.feeAmount = studentCourse.courseFee;
-          this.feeDetail.studentCourseID = studentCourse.studentCourseId;
+          this.feeDetail.feeAmount = null;
+          this.feeDetail.studentCourseID = null;
+          if (studentCourse) {
+            this.feeDetail.feeAmount = studentCourse.courseFee;
+            this.feeDetail.studentCourseID = studentCourse.courseId;
+          }
           console.log(studentCourse);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  updateStudentCourse(courseId) {
+    const selectedCourse = this.courses.find((course) => {
+      return course.courseID === courseId
+    });
+    const currentCourse = {
+      courseFee: selectedCourse.courseFee,
+      courseId: courseId,
+      fromDate: new Date(),
+      isActive: true,
+      studentCourseId: 0,
+      studentId: this.feeDetail.studentID,
+      toDate: null
+    };
+    this.studentService.updateStudentCourse(this.feeDetail.studentId, currentCourse)
+      .subscribe(
+        response => {
+          this.feeDetail.feeAmount = currentCourse.courseFee;
+          console.log(response);
         },
         error => {
           console.log(error);
