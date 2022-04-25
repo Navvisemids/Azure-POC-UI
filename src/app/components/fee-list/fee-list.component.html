@@ -30,6 +30,9 @@
     <div class="col-md-12">
       <div>
         <h4>Fee List</h4>
+        <a routerLink="/fee/0">
+          Add Fees
+        </a>
         <div class="form-group">
             <label for="description">From Date</label>
             <input type="date" class="form-control" id="fromDate" name="fromDate" [ngModel]="feeFilter.fromDate | date:'yyyy-MM-dd'"

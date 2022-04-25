@@ -12,6 +12,8 @@ export class FeeDetailsComponent implements OnInit {
   feeDetail = null;
   message = '';
   courses = [];
+  feeId = null;
+  students = [];
 
   constructor(
     private studentService: StudentService,
@@ -20,8 +22,23 @@ export class FeeDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.message = '';
-    this.readAllCourses()
-    this.getFee(this.route.snapshot.paramMap.get('id'));
+    this.readAllCourses();
+    this.feeId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
+    if (this.feeId) {
+      this.getFee(this.feeId);
+    } else {
+      this.feeDetail = {
+        cancelled: false,
+        feeAmount: null,
+        feesDate: null,
+        feesId: this.feeId,
+        pendingAmount: 0,
+        studentCourseID: null,
+        studentID: null,
+        studentName: ''
+      }
+      this.readAllStudents();
+    }
   }
 
   readAllCourses(): void {
@@ -30,6 +47,31 @@ export class FeeDetailsComponent implements OnInit {
         courses => {
           this.courses = courses;
           console.log(courses);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  readAllStudents(): void {
+    this.studentService.readAll()
+      .subscribe(
+        students => {
+          this.students = students;
+          console.log(students);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  getStudentCourse(studentId) {
+    this.studentService.getStudentCourse(studentId)
+      .subscribe(
+        studentCourse => {
+          this.feeDetail.feeAmount = studentCourse.courseFee;
+          this.feeDetail.studentCourseID = studentCourse.studentCourseId;
+          console.log(studentCourse);
         },
         error => {
           console.log(error);
