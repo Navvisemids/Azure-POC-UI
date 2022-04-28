@@ -1,0 +1,47 @@
+<div class="list row">
+    <div class="col-md-12">
+      <div>
+        <h4>Payment List</h4>
+        <div class="form-group">
+            <label for="description">From Date</label>
+            <input type="date" class="form-control" id="fromDate" name="fromDate" [ngModel]="paymentFilter.fromDate | date:'yyyy-MM-dd'"
+            (ngModelChange)="paymentFilter.fromDate = $event">
+        </div>
+        <div class="form-group">
+            <label for="description">To Date</label>
+            <input type="date" class="form-control" id="toDate" name="toDate" [ngModel]="paymentFilter.toDate | date:'yyyy-MM-dd'"
+            (ngModelChange)="paymentFilter.toDate = $event">
+        </div>
+        <button type="button" class="btn btn-secondary"
+          (click)="readAllPaymentList()"
+        >
+          Apply
+        </button>
+      </div>
+      <table>
+        <tr>
+          <th>Student Name</th>
+          <th>Fee Date</th>
+          <th>Fee Amount</th>
+          <th>Reciept Date</th>
+          <th>Reciept Amount</th>
+          <th>Payment Mode</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr *ngFor="let payment of paymentList; let i = index">
+          <td>{{payment.studentName}}</td>
+          <td>{{payment.feesDate | date:'dd-MM-yyyy'}}</td>
+          <td>{{payment.feeAmount}}</td>
+          <td>{{payment.receiptDate | date:'dd-MM-yyyy'}}</td>
+          <td>{{payment.receiptAmount}}</td>
+          <td>{{payment.paymentMode}}</td>
+          <td><a routerLink="/payment/{{payment.feeReceiptID}}/{{payment.feesID}}">
+            Edit
+          </a></td>
+          <td><button (click)="deletePayment(payment)">Delete</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  

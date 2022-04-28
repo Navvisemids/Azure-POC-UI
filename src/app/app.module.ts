@@ -12,6 +12,8 @@ import { StudentCourseComponent } from './components/student-course/student-cour
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FeeListComponent } from './components/fee-list/fee-list.component';
 import { FeeDetailsComponent } from './components/fee-details/fee-details.component';
+import { PaymentListComponent } from './components/payment-list/payment-list.component';
+import { PaymentDetailsComponent } from './components/payment-details/payment-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { FeeDetailsComponent } from './components/fee-details/fee-details.compon
     StudentCourseComponent,
     DashboardComponent,
     FeeListComponent,
-    FeeDetailsComponent
+    FeeDetailsComponent,
+    PaymentListComponent,
+    PaymentDetailsComponent
   ],
   imports: [
     BrowserModule,

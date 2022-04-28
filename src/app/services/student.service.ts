@@ -59,8 +59,8 @@ export class StudentService {
     return this.httpClient.get(`${baseURL}api/Fees/GetFeesList?fromDate=${fromDate}&toDate=${toDate}&onlyPending=${onlyPending}`);
   }
 
-  deleteFee(data): Observable<any> {
-    return this.httpClient.delete(`${baseURL}api/Fees`, data);
+  deleteFee(id): Observable<any> {
+    return this.httpClient.delete(`${baseURL}api/Fees?studentFeesID=${id}`);
   }
 
   readFee(id): Observable<any> {
@@ -69,6 +69,18 @@ export class StudentService {
 
   updateFee(data): Observable<any> {
     return this.httpClient.put(baseURL + 'api/Fees', data);
+  }
+
+  readAllPaymentList(fromDate, toDate): Observable<any> {
+    return this.httpClient.get(`${baseURL}api/FeesReceipts/GetPaymentList?fromDate=${fromDate}&toDate=${toDate}`);
+  }
+
+  deletePayment(id): Observable<any> {
+    return this.httpClient.delete(`${baseURL}api/FeesReceipts?feeReceiptID=${id}`);
+  }
+
+  updatePayment(data): Observable<any> {
+    return this.httpClient.put(baseURL + 'api/FeesReceipts', data);
   }
   
 }

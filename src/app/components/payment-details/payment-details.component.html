@@ -1,0 +1,77 @@
+<div style="width: 500px; margin: auto;">
+    <div class="edit-form">
+      <h4>Payment</h4>
+      <form>
+        <div class="form-group">
+          <label for="title"><strong>Student Name:</strong></label>
+          <input disabled type="text" class="form-control" id="studentName" name="studentName" [ngModel]="feeDetail.studentName">
+        </div>
+        <div class="form-group">
+            <label for="description"><strong>Course: </strong></label> 
+            <select disabled class="form-control" name="course" id="course" [ngModel]="feeDetail.studentCourseID">
+              <option *ngFor="let c of courses" [ngValue]="c.courseID">{{c.name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description"><strong>Fee Date</strong></label>
+            <input disabled type="date" class="form-control" id="feesDate" name="feesDate" [ngModel]="feeDetail.feesDate | date:'yyyy-MM-dd'">
+          </div>
+        <div class="form-group">
+          <label for="title"><strong>Fee Amount</strong></label>
+          <input
+            disabled
+            type="text"
+            class="form-control"
+            id="feeAmount"
+            [ngModel]="feeDetail.feeAmount"
+            name="feeAmount"
+          />
+        </div>
+        <div class="form-group">
+          <label for="title"><strong>Pending Amount</strong></label>
+          <input
+            disabled
+            type="text"
+            class="form-control"
+            id="pendingAmount"
+            [ngModel]="feeDetail.pendingAmount"
+            name="pendingAmount"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description"><strong>Receipt Date</strong></label>
+          <input type="date" class="form-control" id="receiptDate" name="receiptDate" [ngModel]="paymentDetail.receiptDate | date:'yyyy-MM-dd'"
+            (ngModelChange)="paymentDetail.receiptDate = $event">
+        </div>
+        <div class="form-group">
+          <label for="title"><strong>Receipt Amount</strong></label>
+          <input
+            type="text"
+            class="form-control"
+            id="receiptAmount"
+            [(ngModel)]="paymentDetail.receiptAmount"
+            name="receiptAmount"
+          />
+        </div>
+        <div class="form-group">
+          <label for="description"><strong>Payment Mode: </strong></label> 
+          <select class="form-control" name="paymentMode" id="paymentMode" [(ngModel)]="paymentDetail.paymentMode">
+            <option value="PhonePe">PhonePe</option>
+            <option value="GooglePay">Google Pay</option>
+            <option value="Paytm">Paytm</option>
+            <option value="Cash">Cash</option>
+            <option value="CreditCard">Credit Card</option>
+            <option value="DebitCard">Debit Card</option>
+          </select>
+        </div>
+      </form>
+
+      <button type="button" class="btn btn-secondary"
+        (click)="updatePayment()"
+      >
+        Update
+      </button>
+      <p>{{message}}</p>
+    </div>
+
+  </div>

@@ -67,6 +67,7 @@
           <th>Pending Amount</th>
           <th>Edit</th>
           <th>Delete</th>
+          <th>Pay</th>
         </tr>
         <tr *ngFor="let fee of feeList; let i = index">
           <td>{{fee.studentName}}</td>
@@ -77,6 +78,9 @@
             Edit
           </a></td>
           <td><button (click)="deleteFee(fee)">Delete</button></td>
+          <td><a routerLink="/payment/0/{{fee.feesId}}">
+            Pay
+          </a></td>
         </tr>
       </table>
     </div>

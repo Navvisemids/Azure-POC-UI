@@ -8,6 +8,8 @@ import { StudentCourseComponent } from './components/student-course/student-cour
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FeeListComponent } from './components/fee-list/fee-list.component';
 import { FeeDetailsComponent } from './components/fee-details/fee-details.component';
+import { PaymentListComponent } from './components/payment-list/payment-list.component';
+import { PaymentDetailsComponent } from './components/payment-details/payment-details.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -17,7 +19,9 @@ const routes: Routes = [
   { path: 'student-course/:id', component: StudentCourseComponent },
   { path: 'student-create', component: StudentCreateComponent },
   { path: 'fee-list', component: FeeListComponent },
-  { path: 'fee/:id', component: FeeDetailsComponent }
+  { path: 'fee/:id', component: FeeDetailsComponent },
+  { path: 'payment-list', component: PaymentListComponent },
+  { path: 'payment/:id/:feeId', component: PaymentDetailsComponent }
 ];
 
 @NgModule({
