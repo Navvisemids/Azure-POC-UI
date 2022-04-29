@@ -24,7 +24,7 @@ export class FeeListComponent implements OnInit {
     this.feeList = [];
     this.feeFilter = {
       fromDate: '2022-01-01',
-      toDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-01',
+      toDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
       onlyPending: false
     };
     this.readAllFeeList();

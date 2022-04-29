@@ -78,7 +78,7 @@
             Edit
           </a></td>
           <td><button (click)="deleteFee(fee)">Delete</button></td>
-          <td><a routerLink="/payment/0/{{fee.feesId}}">
+          <td><a *ngIf="fee.pendingAmount" routerLink="/payment/0/{{fee.feesId}}">
             Pay
           </a></td>
         </tr>

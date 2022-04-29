@@ -2,6 +2,9 @@
     <div class="col-md-12">
       <div>
         <h4>Payment List</h4>
+        <a routerLink="/fee-list">
+          Add Payment
+        </a>
         <div class="form-group">
             <label for="description">From Date</label>
             <input type="date" class="form-control" id="fromDate" name="fromDate" [ngModel]="paymentFilter.fromDate | date:'yyyy-MM-dd'"

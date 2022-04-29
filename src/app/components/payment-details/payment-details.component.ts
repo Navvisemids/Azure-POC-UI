@@ -15,7 +15,6 @@ export class PaymentDetailsComponent implements OnInit {
   paymentReceiptId = null;
   students = [];
   feeId = null;
-  feeDetail = null;
 
   constructor(
     private studentService: StudentService,
@@ -27,30 +26,23 @@ export class PaymentDetailsComponent implements OnInit {
     this.paymentReceiptId = Number.parseInt(this.route.snapshot.paramMap.get('id'));
     this.feeId = Number.parseInt(this.route.snapshot.paramMap.get('feeId'));
     this.readAllCourses();
-    // if (this.paymentReceiptId) {
-    //   this.getPayment(this.paymentReceiptId);
-    // } else {
-      this.paymentDetail = {
-        feesReceiptID: this.paymentReceiptId,
-        feesID: this.feeId,
-        receiptDate: new Date(),
-        receiptAmount: null,
-        paymentMode: ''
-      }
-      this.feeDetail = {
-        cancelled: false,
-        feeAmount: null,
-        feesDate: null,
-        feesId: this.feeId,
-        pendingAmount: 0,
-        studentCourseID: null,
-        studentID: null,
-        studentName: ''
-      }
-      if (this.feeId) {
-        this.getFee(this.feeId);
-      }
-    // }
+    this.paymentDetail = {
+      feeAmount: null,
+      feeReceiptID: this.paymentReceiptId,
+      feesDate: null,
+      feesID: this.feeId,
+      paymentMode: null,
+      receiptAmount: 0,
+      receiptDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+      studentCourseID: null,
+      studentID: null,
+      studentName: ''
+    }
+    if (this.paymentReceiptId) {
+      this.getPayment(this.paymentReceiptId);
+    } else if (this.feeId) {
+      this.getFee(this.feeId);
+    }
   }
 
   readAllCourses(): void {
@@ -69,7 +61,13 @@ export class PaymentDetailsComponent implements OnInit {
     this.studentService.readFee(id)
       .subscribe(
         fee => {
-          this.feeDetail = fee;
+          this.paymentDetail = fee;
+          this.paymentDetail = {
+            ...this.paymentDetail,
+            feeReceiptID: this.paymentReceiptId,
+            feesID: this.feeId,
+            receiptDate: (new Date().getMonth() + 1) + '-' + new Date().getDate() + '-' + new Date().getFullYear()
+          };
           console.log(fee);
         },
         error => {
@@ -78,10 +76,11 @@ export class PaymentDetailsComponent implements OnInit {
   }
   
   getPayment(id): void {
-    this.studentService.readFee(id)
+    this.studentService.readPayment(id)
       .subscribe(
         fee => {
           this.paymentDetail = fee;
+          this.paymentDetail.pendingAmount = this.paymentDetail.receiptAmount;
           console.log(fee);
         },
         error => {
@@ -90,15 +89,28 @@ export class PaymentDetailsComponent implements OnInit {
   }
 
   updatePayment(): void {
-    this.studentService.updatePayment(this.paymentDetail)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.message = 'The payment was updated!';
-        },
-        error => {
-          console.log(error);
-        });
+    if (this.paymentDetail.receiptAmount > this.paymentDetail.pendingAmount) {
+      alert("Reciept amount is greater than pending amount");
+    } else {
+      const payment = {
+        feesReceiptID: this.paymentDetail.feeReceiptID,
+        feesID: this.paymentDetail.feesID,
+        receiptDate: this.paymentDetail.receiptDate,
+        receiptAmount: this.paymentDetail.receiptAmount,
+        paymentMode: this.paymentDetail.paymentMode
+      }
+      this.studentService.updatePayment(payment)
+        .subscribe(
+          response => {
+            console.log(response);
+            this.message = 'The payment was updated!';
+            this.router.navigate(['/payment-list']);
+          },
+          error => {
+            console.log(error);
+          });
+    }
+    
   }
 
   

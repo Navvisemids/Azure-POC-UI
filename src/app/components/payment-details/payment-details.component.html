@@ -4,17 +4,17 @@
       <form>
         <div class="form-group">
           <label for="title"><strong>Student Name:</strong></label>
-          <input disabled type="text" class="form-control" id="studentName" name="studentName" [ngModel]="feeDetail.studentName">
+          <input disabled type="text" class="form-control" id="studentName" name="studentName" [ngModel]="paymentDetail.studentName">
         </div>
         <div class="form-group">
             <label for="description"><strong>Course: </strong></label> 
-            <select disabled class="form-control" name="course" id="course" [ngModel]="feeDetail.studentCourseID">
+            <select disabled class="form-control" name="course" id="course" [ngModel]="paymentDetail.studentCourseID">
               <option *ngFor="let c of courses" [ngValue]="c.courseID">{{c.name}}</option>
             </select>
         </div>
         <div class="form-group">
             <label for="description"><strong>Fee Date</strong></label>
-            <input disabled type="date" class="form-control" id="feesDate" name="feesDate" [ngModel]="feeDetail.feesDate | date:'yyyy-MM-dd'">
+            <input disabled type="date" class="form-control" id="feesDate" name="feesDate" [ngModel]="paymentDetail.feesDate | date:'yyyy-MM-dd'">
           </div>
         <div class="form-group">
           <label for="title"><strong>Fee Amount</strong></label>
@@ -23,7 +23,7 @@
             type="text"
             class="form-control"
             id="feeAmount"
-            [ngModel]="feeDetail.feeAmount"
+            [ngModel]="paymentDetail.feeAmount"
             name="feeAmount"
           />
         </div>
@@ -34,7 +34,7 @@
             type="text"
             class="form-control"
             id="pendingAmount"
-            [ngModel]="feeDetail.pendingAmount"
+            [ngModel]="paymentDetail.pendingAmount"
             name="pendingAmount"
           />
         </div>

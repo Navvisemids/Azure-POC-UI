@@ -82,5 +82,9 @@ export class StudentService {
   updatePayment(data): Observable<any> {
     return this.httpClient.put(baseURL + 'api/FeesReceipts', data);
   }
+
+  readPayment(id): Observable<any> {
+    return this.httpClient.get(`${baseURL}api/FeesReceipts?feesreceiptID=${id}`);
+  }
   
 }
