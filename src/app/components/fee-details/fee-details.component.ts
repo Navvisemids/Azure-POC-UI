@@ -33,6 +33,7 @@ export class FeeDetailsComponent implements OnInit {
         feesDate: null,
         feesId: this.feeId,
         pendingAmount: 0,
+        courseID: null,
         studentCourseID: null,
         studentID: null,
         studentName: ''
@@ -69,11 +70,13 @@ export class FeeDetailsComponent implements OnInit {
     this.studentService.getStudentCourse(studentId)
       .subscribe(
         studentCourse => {
+          debugger;
           this.feeDetail.feeAmount = null;
           this.feeDetail.studentCourseID = null;
           if (studentCourse) {
             this.feeDetail.feeAmount = studentCourse.courseFee;
-            this.feeDetail.studentCourseID = studentCourse.courseId;
+            this.feeDetail.courseID = studentCourse.courseId;
+            this.feeDetail.studentCourseID = studentCourse.studentCourseId;
           }
           console.log(studentCourse);
         },
@@ -110,7 +113,9 @@ export class FeeDetailsComponent implements OnInit {
     this.studentService.readFee(id)
       .subscribe(
         fee => {
+          debugger;
           this.feeDetail = fee;
+          this.getStudentCourse(this.feeDetail.studentID)
           console.log(fee);
         },
         error => {

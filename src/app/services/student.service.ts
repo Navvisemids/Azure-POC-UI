@@ -19,6 +19,10 @@ export class StudentService {
     return this.httpClient.get(`${baseURL}api/Student/${id}`);
   }
 
+  readByName(searchString): Observable<any> {
+    return this.httpClient.get(`${baseURL}api/Student/SearchStudents?searchString=${searchString}`);
+  }
+
   create(data): Observable<any> {
     return this.httpClient.post(baseURL + 'api/Student', data);
   }

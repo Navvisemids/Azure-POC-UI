@@ -20,7 +20,9 @@ export class StudentCreateComponent implements OnInit {
     fatherMobile: null,
     isActive: true,
     motherEmailID: null,
-    motherMobile: null
+    motherMobile: null,
+    schoolName: null,
+    class: null
   };
   submitted = false;
 
@@ -56,8 +58,10 @@ export class StudentCreateComponent implements OnInit {
       fatherMobile: null,
       isActive: true,
       motherEmailID: null,
-      motherMobile: null
-    };
+      motherMobile: null,
+      schoolName: null,
+      class: null
+      };
   }
 
 }

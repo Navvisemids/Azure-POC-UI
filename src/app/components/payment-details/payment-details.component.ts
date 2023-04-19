@@ -33,7 +33,8 @@ export class PaymentDetailsComponent implements OnInit {
       feesID: this.feeId,
       paymentMode: null,
       receiptAmount: 0,
-      receiptDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+      //receiptDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+      receiptDate: null,
       studentCourseID: null,
       studentID: null,
       studentName: ''
@@ -66,7 +67,7 @@ export class PaymentDetailsComponent implements OnInit {
             ...this.paymentDetail,
             feeReceiptID: this.paymentReceiptId,
             feesID: this.feeId,
-            receiptDate: (new Date().getMonth() + 1) + '-' + new Date().getDate() + '-' + new Date().getFullYear()
+            receiptDate: null
           };
           console.log(fee);
         },

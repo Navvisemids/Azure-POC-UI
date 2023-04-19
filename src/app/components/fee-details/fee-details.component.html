@@ -11,7 +11,7 @@
         </div>
         <div class="form-group">
             <label for="description"><strong>Course: </strong></label> 
-            <select [disabled]="feeDetail.studentCourseID" class="form-control" name="course" id="course" [(ngModel)]="feeDetail.studentCourseID" (ngModelChange)="updateStudentCourse($event)">
+            <select [disabled]="feeDetail.studentCourseID" class="form-control" name="course" id="course" [(ngModel)]="feeDetail.courseID" (ngModelChange)="updateStudentCourse($event)">
               <option *ngFor="let c of courses" [ngValue]="c.courseID">{{c.name}}</option>
             </select>
         </div>

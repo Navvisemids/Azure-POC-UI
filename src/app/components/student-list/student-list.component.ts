@@ -105,7 +105,7 @@ export class StudentListComponent implements OnInit {
   }
 
   searchByName(): void {
-    this.studentService.read(this.name)
+    this.studentService.readByName(this.name)
       .subscribe(
         students => {
           if (students.length > 0) {

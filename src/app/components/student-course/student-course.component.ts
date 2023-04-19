@@ -65,6 +65,7 @@ export class StudentCourseComponent implements OnInit {
               fromDate: null,
               toDate: null,
               courseFee: null,
+              isOnline: false,
               isActive: false
             }
           }

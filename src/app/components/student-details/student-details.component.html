@@ -42,6 +42,16 @@
         </div>
 
         <div class="form-group">
+          <label for="description">School Name</label>
+          <input class="form-control" type="schoolname" id="schoolname" name="schoolName" [(ngModel)]="currentStudent.schoolName"/>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Studying Class</label>
+          <input class="form-control" type="class" id="class" name="class" [(ngModel)]="currentStudent.class"/>
+        </div>
+
+        <div class="form-group">
           <label for="description">Father's Email ID</label>
           <input class="form-control" type="email" id="fatherEmail" name="fatherEmail" [(ngModel)]="currentStudent.fatherEmailID"/>
         </div>
