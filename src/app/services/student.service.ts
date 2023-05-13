@@ -90,5 +90,12 @@ export class StudentService {
   readPayment(id): Observable<any> {
     return this.httpClient.get(`${baseURL}api/FeesReceipts?feesreceiptID=${id}`);
   }
-  
+
+  readStudentStatistics(): Observable<any> {
+    return this.httpClient.get(baseURL + 'api/Dashboard/StudentSummary');
+  }
+
+  readFeesStatistics(): Observable<any> {
+    return this.httpClient.get(baseURL + 'api/Dashboard/FeesSummary');
+  }
 }

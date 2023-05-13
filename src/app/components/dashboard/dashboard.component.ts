@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
+  studentSummary: any;
+  feeSummary: any;
 
   constructor(
     private studentService: StudentService,
@@ -16,6 +18,32 @@ export class DashboardComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
-   
+   this.readStudentStatistics();
+   this.readFeesStatistics();
   }
+
+  readStudentStatistics(): void {
+    this.studentService.readStudentStatistics()
+      .subscribe(
+        studentSummary => {
+          this.studentSummary = studentSummary;
+          console.log(studentSummary);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  readFeesStatistics(): void {
+    this.studentService.readFeesStatistics()
+      .subscribe(
+        feeSummary => {
+          this.feeSummary = feeSummary;
+          console.log(feeSummary);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
 }

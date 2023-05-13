@@ -1,3 +1,31 @@
 <div style="width: 500px; margin: auto;">
     <h4>Welcome to Chess Academy</h4>
 </div>
+
+<div class="list row">
+    <div class="col-md-12">
+        <h4>Student Summary</h4>
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Count</th>
+            </tr>
+            <tr *ngFor="let summary of studentSummary; let i = index">
+                <td>{{summary.description}}</td>
+                <td>{{summary.value}}</td>
+            </tr>
+        </table>
+        <br>
+        <h4>Fees Summary</h4>
+        <table>
+            <tr>
+                <th>Description</th>
+                <th>Count</th>
+            </tr>
+            <tr *ngFor="let summary of feeSummary; let i = index">
+                <td>{{summary.description}}</td>
+                <td>{{summary.value}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
