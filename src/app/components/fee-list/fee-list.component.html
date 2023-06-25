@@ -78,10 +78,21 @@
             Edit
           </a></td>
           <td><button (click)="deleteFee(fee)">Delete</button></td>
-          <td><a *ngIf="fee.pendingAmount" routerLink="/payment/0/{{fee.feesId}}">
+          <td><button *ngIf="fee.pendingAmount" (click)="payFees(fee)">Pay</button></td>
+<!--           <td><a *ngIf="fee.pendingAmount" routerLink="/payment/0/{{fee.feesId}}">
             Pay
           </a></td>
+ -->        </tr>
+        <tr>
+          <td>Total</td>
+          <td></td>
+          <td>{{totalFees}}</td>
+          <td>{{totalPending}}</td>
+          <td></td>
+          <td></td>
+          <td></td>
         </tr>
+
       </table>
     </div>
     <div class="col-md-6">

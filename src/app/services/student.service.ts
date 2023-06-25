@@ -98,4 +98,11 @@ export class StudentService {
   readFeesStatistics(): Observable<any> {
     return this.httpClient.get(baseURL + 'api/Dashboard/FeesSummary');
   }
+
+ 
+  public feeFilter = {
+    fromDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + 1,
+    toDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
+    onlyPending: false
+  };
 }

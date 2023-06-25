@@ -15,6 +15,7 @@ export class PaymentDetailsComponent implements OnInit {
   paymentReceiptId = null;
   students = [];
   feeId = null;
+  fromFees = false;
 
   constructor(
     private studentService: StudentService,
@@ -42,6 +43,7 @@ export class PaymentDetailsComponent implements OnInit {
     if (this.paymentReceiptId) {
       this.getPayment(this.paymentReceiptId);
     } else if (this.feeId) {
+      this.fromFees = true;
       this.getFee(this.feeId);
     }
   }
@@ -105,7 +107,10 @@ export class PaymentDetailsComponent implements OnInit {
           response => {
             console.log(response);
             this.message = 'The payment was updated!';
-            this.router.navigate(['/payment-list']);
+            if(this.fromFees)
+              this.router.navigate(['/fee-list']);
+            else
+              this.router.navigate(['/payment-list']);
           },
           error => {
             console.log(error);
