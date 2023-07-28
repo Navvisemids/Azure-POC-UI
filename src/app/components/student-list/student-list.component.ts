@@ -14,12 +14,24 @@ export class StudentListComponent implements OnInit {
   currentIndex = -1;
   name = '';
   courses: any[];
+  filterIsActive = null;
+  filterIsOnline = null;
+  filterCourseId = null;
+  totalFees: any;
 
   constructor(private studentService: StudentService, private router: Router) { }
 
   ngOnInit(): void {
-    this.readStudents();
+    // Initialize variables from the service 
+    this.name = this.studentService.studentFilter.name;
+    this.filterIsActive = this.studentService.studentFilter.filterIsActive;
+    this.filterIsOnline = this.studentService.studentFilter.filterIsOnline;
+    this.filterCourseId = this.studentService.studentFilter.filterCourseId;
+
+    // load students
+    this.searchByName();
     this.readAllCourses();
+
   }
 
   readStudents(): void {
@@ -49,10 +61,12 @@ export class StudentListComponent implements OnInit {
   }
 
   readAllCourses(): void {
+    this.courses = [];
+    this.courses.push({"courseID":null, "name":"All", "description":"All", "courseFee":"0"});
     this.studentService.readAllCourses()
       .subscribe(
         courses => {
-          this.courses = courses;
+          this.courses.push(...courses);
           console.log(courses);
         },
         error => {
@@ -105,7 +119,15 @@ export class StudentListComponent implements OnInit {
   }
 
   searchByName(): void {
-    this.studentService.readByName(this.name)
+    // Initialize variables to service 
+    this.studentService.studentFilter.name = this.name;
+    this.studentService.studentFilter.filterIsActive = this.filterIsActive;
+    this.studentService.studentFilter.filterIsOnline = this.filterIsOnline;
+    this.studentService.studentFilter.filterCourseId = this.filterCourseId;
+
+
+
+    this.studentService.readByName(this.name, this.filterIsActive, this.filterIsOnline, this.filterCourseId)
       .subscribe(
         students => {
           if (students.length > 0) {
@@ -113,12 +135,19 @@ export class StudentListComponent implements OnInit {
           } else {
             this.students = [students];
           }
-          
+          this.calculateTotalFees(students)
           console.log(students);
         },
         error => {
           console.log(error);
         });
+  }
+
+  calculateTotalFees(data) {
+    this.totalFees = 0;
+    for(let j=0;j<data.length;j++){   
+         this.totalFees+= data[j].courseFee  
+    }  
   }
 
 }

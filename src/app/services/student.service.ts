@@ -19,8 +19,29 @@ export class StudentService {
     return this.httpClient.get(`${baseURL}api/Student/${id}`);
   }
 
-  readByName(searchString): Observable<any> {
-    return this.httpClient.get(`${baseURL}api/Student/SearchStudents?searchString=${searchString}`);
+  readByName(searchString,isActive, isOnline, courseId): Observable<any> {
+    // return this.httpClient.get(`${baseURL}api/Student/SearchStudents?searchString=${searchString}&isActive=${isActive}&isOnline=${isOnline}&courseId=${courseId}`);
+    //api/Student/SearchStudents?searchString=${searchString}&isActive=${isActive}&isOnline=${isOnline}&courseId=${courseId}
+
+    var url = "";
+
+
+    url = baseURL + 'api/Student/SearchStudents?searchString=' + searchString;
+
+    if(!(isActive==null)){
+      url = url + `&isActive=${isActive}`;
+    }
+
+    if(!(isOnline==null)){
+      url = url + `&isOnline=${isOnline}`;
+    }
+
+    if(!(courseId==null)){
+      url = url + `&courseId=${courseId}`;
+    }
+
+
+    return this.httpClient.get(`${url}`);
   }
 
   create(data): Observable<any> {
@@ -104,5 +125,12 @@ export class StudentService {
     fromDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + 1,
     toDate: new Date().getFullYear() + '-' + (new Date().getMonth() + 1) + '-' + new Date().getDate(),
     onlyPending: false
+  };
+
+  public studentFilter = {
+    name: "",
+    filterIsActive: null,
+    filterIsOnline: null,
+    filterCourseId: null
   };
 }
